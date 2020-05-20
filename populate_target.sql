@@ -13,8 +13,8 @@ insert into openstreetstarget (
    ,toright
    ,open_date
    ,days_of_Week
-   ,daily_start_time
-   ,daily_end_time
+   ,start_time
+   ,end_time
    ,length_miles
    ,shape )
 select '''' || a.segmentid || '''' as segmentid

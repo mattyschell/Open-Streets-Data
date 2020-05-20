@@ -1,22 +1,3 @@
-create table if not exists openstreetstarget (
-    objectid            serial primary key
-   ,segmentid           text   -- these are LION attributes
-   ,nodeidfrom          text
-   ,nodeidto            text
-   ,street              varchar(4000)
-   ,fromleft            varchar(32) -- house number, can include non numeric
-   ,toleft              varchar(32)
-   ,fromright           varchar(32)
-   ,toright             varchar(32) 
-   ,open_date           date         -- open streets starts here..
-   ,days_of_week        varchar(256)  
-   ,daily_start_time    varchar(256)
-   ,daily_end_time      varchar(256)
-   ,length_miles        numeric
-   ,shape               geometry(linestring, 4326) -- this is lion 
-); 
-create index if not exists openstreetstargetshape on openstreetstarget using GIST(shape);
-alter table openstreetstarget alter column shape set not null;
 --
 CREATE TABLE openstreetssource (
     gid         serial primary key,
@@ -36,6 +17,27 @@ CREATE TABLE openstreetssource (
     shape       geometry(multilinestring, 2263) NULL
 );
 --
+create table if not exists openstreetstarget (
+    objectid            serial primary key
+   ,segmentid           text   -- these are LION attributes
+   ,nodeidfrom          text
+   ,nodeidto            text
+   ,street              varchar(4000)
+   ,fromleft            varchar(32) -- house number, can include non numeric
+   ,toleft              varchar(32)
+   ,fromright           varchar(32)
+   ,toright             varchar(32) 
+   ,open_date           date         -- open streets starts here..
+   ,days_of_week        varchar(256)  
+   ,start_time          varchar(256)
+   ,end_time            varchar(256)
+   ,length_miles        numeric
+   ,shape               geometry(linestring, 4326) -- this is lion 
+); 
+create index if not exists openstreetstargetshape on openstreetstarget using GIST(shape);
+alter table openstreetstarget alter column shape set not null;
+
+--
 create table if not exists openstreetsreview (
     objectid            serial primary key
    ,segmentid           varchar(32)   -- these are LION attributes
@@ -48,8 +50,8 @@ create table if not exists openstreetsreview (
    ,toright             varchar(32) 
    ,open_date           date         -- open streets starts here..
    ,days_of_week        varchar(256)  
-   ,daily_start_time    varchar(256)
-   ,daily_end_time      varchar(256)
+   ,start_time          varchar(256)
+   ,end_time            varchar(256)
    ,length_miles        numeric
    ,shape               geometry(linestring, 2263) 
 ); 
