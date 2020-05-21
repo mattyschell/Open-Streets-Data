@@ -23,10 +23,10 @@ create table if not exists openstreetstarget (
    ,nodeidfrom          text
    ,nodeidto            text
    ,street              varchar(4000)
-   ,fromleft            numeric 
-   ,toleft              numeric
-   ,fromright           numeric
-   ,toright             numeric 
+   ,fromleft            bigint 
+   ,toleft              bigint
+   ,fromright           bigint
+   ,toright             bigint 
    ,open_date           date         -- open streets starts here..
    ,days_of_week        varchar(256)  
    ,start_time          varchar(256)
@@ -44,10 +44,10 @@ create table if not exists openstreetsreview (
    ,nodeidfrom          varchar(32) 
    ,nodeidto            varchar(32)
    ,street              varchar(4000)
-   ,fromleft            numeric 
-   ,toleft              numeric
-   ,fromright           numeric
-   ,toright             numeric 
+   ,fromleft            bigint 
+   ,toleft              bigint
+   ,fromright           bigint
+   ,toright             bigint 
    ,open_date           date         -- open streets starts here..
    ,days_of_week        varchar(256)  
    ,start_time          varchar(256)
