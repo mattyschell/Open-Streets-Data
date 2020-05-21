@@ -37,6 +37,14 @@ join
 openstreetssource b
 on st_within(a.shapept,
              st_buffer(b.shape, 4));
+--the insert above is dropping leading 0s from character cols without the quotes
+--but quotes not right either, this is some old lady who swallowed the fly ish
+update 
+    openstreetstarget 
+set 
+    segmentid = replace(segmentid,'''','')
+   ,nodeidfrom = replace(nodeidfrom,'''','')
+   ,nodeidto = replace(nodeidto,'''','');
 --drop column lionshapept from lion;
 delete from openstreetsreview;
 insert into openstreetsreview

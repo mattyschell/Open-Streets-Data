@@ -3,6 +3,9 @@
 
 ## Data In This Repo
 
+TBD
+
+
 
 # How Did It Get Here
 
@@ -14,3 +17,13 @@ LION 20B
     
     https://www1.nyc.gov/site/planning/data-maps/open-data/dwn-lion.page
 
+
+```shell
+$ ./loadopenstreets.sh
+```
+
+```
+$ psql -f populate_target.sql
+```
+
+ogr2ogr 
