@@ -1,8 +1,8 @@
 alter table lion add column shapept geometry(point, 2263);
 update lion set shapept = ST_Line_Interpolate_Point(st_linemerge(geom),.50);
 create index if not exists lionshapept on lion using GIST(shapept);
-delete from openstreetstarget;
-insert into openstreetstarget (
+delete from open_street;
+insert into open_street (
     segmentid
    ,nodeidfrom
    ,nodeidto
@@ -34,20 +34,31 @@ select '''' || a.segmentid || '''' as segmentid
 from 
 lion a
 join
+(select distinct 
+       a.gid
+      ,b.date_open_
+      ,b.day_of_wee
+      ,b.start_time
+      ,b.end_time
+      ,b.length_in_ from 
+lion a
+join
 openstreetssource b
 on st_within(a.shapept,
-             st_buffer(b.shape, 4));
+             st_buffer(b.shape, 4))
+) b
+on a.gid = b.gid;
 --the insert above is dropping leading 0s from character cols without the quotes
 --but quotes not right either, this is some old lady who swallowed the fly ish
 update 
-    openstreetstarget 
+    open_street 
 set 
     segmentid = replace(segmentid,'''','')
    ,nodeidfrom = replace(nodeidfrom,'''','')
    ,nodeidto = replace(nodeidto,'''','');
 --drop column lionshapept from lion;
-delete from openstreetsreview;
-insert into openstreetsreview
+delete from open_streetreview;
+insert into open_streetreview
 (   segmentid
    ,nodeidfrom
    ,nodeidto
@@ -77,5 +88,5 @@ select
    ,daily_end_time
    ,length_miles
    ,st_transform(shape,2263)
-from openstreetstarget;
+from open_street;
 

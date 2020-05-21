@@ -17,28 +17,28 @@ CREATE TABLE openstreetssource (
     shape       geometry(multilinestring, 2263) NULL
 );
 --
-create table if not exists openstreetstarget (
+create table if not exists open_street (
     objectid            serial primary key
    ,segmentid           text   -- these are LION attributes
    ,nodeidfrom          text
    ,nodeidto            text
-   ,street              varchar(4000)
+   ,street              text
    ,fromleft            bigint 
    ,toleft              bigint
    ,fromright           bigint
    ,toright             bigint 
    ,open_date           date         -- open streets starts here..
-   ,days_of_week        varchar(256)  
-   ,start_time          varchar(256)
-   ,end_time            varchar(256)
+   ,days_of_week        text  
+   ,start_time          text
+   ,end_time            text
    ,length_miles        numeric
    ,shape               geometry(linestring, 4326) -- this is lion 
 ); 
-create index if not exists openstreetstargetshape on openstreetstarget using GIST(shape);
-alter table openstreetstarget alter column shape set not null;
+create index if not exists open_streetshape on open_street using GIST(shape);
+alter table open_street alter column shape set not null;
 
 --
-create table if not exists openstreetsreview (
+create table if not exists open_streetreview (
     objectid            serial primary key
    ,segmentid           varchar(32)   -- these are LION attributes
    ,nodeidfrom          varchar(32) 
